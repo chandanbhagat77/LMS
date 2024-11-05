@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export const signupForm = createAsyncThunk('/signup/user', async (data, { rejectWithValue }) => {
     try {
         console.log("hitted");
 
-        const res = await axios.post('http://192.168.68.115:8000/api/users/create', data, {
+        const res = await axios.post('http://192.168.68.147:8000/api/users/create', data, {
             withCredentials: true
         }); 
          
@@ -36,10 +37,10 @@ export const loginForm = createAsyncThunk('/login/user', async (data, { rejectWi
     try {
         // console.log("hitted");
 
-        const res = await axios.post('http://192.168.68.115:8000/api/auth/login', data); 
+        const res = await axios.post('http://192.168.68.147:8000/api/auth/login', data); 
         
        
-            return `${res}`;
+            return `${JSON.stringify(res)}`;
        
     } catch (error) {
         // Log the entire error response
@@ -62,13 +63,28 @@ export const loginForm = createAsyncThunk('/login/user', async (data, { rejectWi
 }) 
 
 const initialState = {
-    data:   '',
-    isLoggedIn:   false,
-    msg: ""
+    data:   {},
+    isLoggedIn:  false,
+    token :  '',
+   
 }
 const authSlice = createSlice({
     name: 'Auth',
     initialState,
+    reducers: {
+        setAuthData(state, action) {
+            console.log("ACTION is",action);
+            
+          state.data = action.payload.data;
+          state.isLoggedIn = action.payload.isLoggedIn;
+          state.token = action.payload.token;
+        }, 
+         logout: (state, action) => {
+            state.isLoggedIn = false,
+                state.data = {},
+                state.msg = ""
+        }
+    },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
           serializableCheck: {
@@ -76,33 +92,30 @@ const authSlice = createSlice({
             ignoredActions: ['/login/user'],
           },
         }),
-    reducers: {
-        
-        logout: (state, action) => {
-            state.isLoggedIn = false,
-                state.data = {},
-                state.msg = ""
-        }
-
-    },
+   
     extraReducers: (builder) => {
         builder.addCase(signupForm.fulfilled, (state, action) => {
             if (action.payload.data.status == "success") {
                 // localStorage.setItem("isLoggedIn", JSON.stringify(true))
                 // localStorage.setItem("data", JSON.stringify(action?.payload?.data?.data))
+                AsyncStorage.setItem("isLoggedIn","true")
                 state.isLoggedIn = true;
                 // state.data = action?.payload?.data?.data;
             }
 
 
         }).addCase(loginForm.fulfilled, (state, action) => {
-            // console.log("action is ",action);
-            
+            console.log("action is ",action.payload);
+            let data=JSON.parse(action.payload)
             // if (action?.payload?.status) {
                 // localStorage.setItem("isLoggedIn", JSON.stringify(true))
                 // localStorage.setItem("data", JSON.stringify(action?.payload?.data))
+                AsyncStorage.setItem("isLoggedIn","true")
+                AsyncStorage.setItem("token",`${data?.data?.token}`)
+                AsyncStorage.setItem("data",`${JSON.stringify(data?.data?.profile)}`)
                 state.isLoggedIn = true;
-                // state.data = action?.payload?.data;
+                state.data = data?.data?.profile || "";
+                state.token = data?.data?.token || "";
             // }
 
 
@@ -116,7 +129,7 @@ const authSlice = createSlice({
     }
 })
 
-export const { logout } = authSlice.actions;
+export const { logout,setAuthData } = authSlice.actions;
 
 export default authSlice.reducer
 

@@ -1,19 +1,20 @@
 import React from "react";
-import {
-  SafeAreaView,
+import { 
   View,
   Text,
   TouchableOpacity,
   Image,
-} from "react-native";
-import { useTailwind } from "nativewind";
+  ScrollView
+} from "react-native"; 
 
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function WelcomeScreen() {
-  const tailwind = useTailwind();
+ 
 
-  return (
-    <SafeAreaView className="flex-1 bg-white">
+  return (   <ScrollView>
+      <View className="bg-gray-50 h-[100vh] flex flex-col ">
       {/* Skip Button */}
+      
       <View className="flex-row justify-end p-4">
         <TouchableOpacity className="bg-gray-200 px-4 py-2 rounded-full">
           <Text className="text-gray-700 font-medium">SKIP</Text>
@@ -21,10 +22,11 @@ export default function WelcomeScreen() {
       </View>
 
       {/* Centered Content */}
-      <View className="flex-1 justify-center items-center">
-        {/* Replace this with your image */}
-        <Image
-          source={{ uri: "YourImage" }}
+      <View className="flex justify-around  items-center h-[80vh]">
+     
+       <View className="flex justify-around  items-center">
+       <Image
+          source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvJNHQbPvzxDwzlYW9J8gydtarx9m6aB7lug&s" }}
           className="w-48 h-48 mb-8" // Adjust the size as needed
           resizeMode="contain"
         />
@@ -32,11 +34,11 @@ export default function WelcomeScreen() {
           Join Cybex IT Group to Kick Start Your Lesson
         </Text>
         <Text className="text-gray-500 text-center mt-2 px-10">
-          Join and Learn from our Top Instructors!
+        Empowering your journey through cutting-edge IT education and expertise
         </Text>
-      </View>
+       </View>
 
-      {/* Buttons */}
+         {/* Buttons */}
       <View className="flex-row justify-center space-x-4 mb-8 px-10">
         <TouchableOpacity className="flex-1 bg-black py-3 rounded-full mr-2">
           <Text className="text-center text-white font-semibold">Sign In</Text>
@@ -45,6 +47,10 @@ export default function WelcomeScreen() {
           <Text className="text-center text-black font-semibold">Sign Up</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      </View>
+
+     
+    </View>
+    </ScrollView>
   );
 }

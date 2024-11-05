@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import {
   Alert,
@@ -19,7 +20,7 @@ export default function SignInScreen() {
     cnfpassword: "",
     mobile: "", 
   });
-  const {isLoggedIn}=useSelector((state)=>state.auth)
+  const {isLoggedIn,data,token}=useSelector((state)=>state.auth)
   const dispatch=useDispatch()
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -100,6 +101,7 @@ export default function SignInScreen() {
           <Text className="text-5xl font-bold text-center">Sign up</Text>
           <Text className="text-gray-500 text-center mt-1">
             Create Your account {isLoggedIn && <Text>Loggedin</Text>}
+            
           </Text>
         </View>
 
