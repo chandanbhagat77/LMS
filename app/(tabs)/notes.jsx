@@ -1,18 +1,15 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { StyleSheet, Text, View } from "react-native";
 
-// import WelcomeScreen from "../WelcomePage";
-import CourseDetails from "../../components/Pages/Course/CourseDetails";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import SignInScreen from "../../components/Pages/Signup";
 export default function TabTwoScreen() {
   return (
-    
-      <View>
-       
-      <CourseDetails/>
+    <SafeAreaView>
+      <View className="h-[100vh]">
+        <SignInScreen />
       </View>
-   
+    </SafeAreaView>
   );
 }
 
