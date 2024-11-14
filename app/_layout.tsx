@@ -47,6 +47,9 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="stack/profile" options={{ title: "Profile" }} />
         <Stack.Screen name="stack/courseDetails" options={{ title: "Course Overview" }} />
+        <Stack.Screen name="stack/courseCheckout" options={{ headerShown: false}} />
+        <Stack.Screen name="stack/login" options={{ headerShown: false}} />
+        <Stack.Screen name="stack/signup" options={{ headerShown: false}} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

@@ -66,7 +66,7 @@ export default function HomeScreen() {
         <TouchableOpacity  onPress={() => navigation.navigate("stack/profile")} className="bg-black p-2 rounded-full text-white">
         <AntDesign name="user" size={24}   color={"white"} />
         </TouchableOpacity>
-        </View> : <MaterialIcons name="login" size={24} color="black" />}
+        </View> : <MaterialIcons name="login" size={24} color="black" onPress={() => navigation.navigate("stack/login")}/>}
       </View>
 
       {/* Search Bar */}

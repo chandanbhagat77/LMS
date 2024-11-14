@@ -3,11 +3,14 @@ import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import axios from 'axios';
 
+import { useNavigation } from '@react-navigation/native';
 const CourseDetails = ({ courseId }) => {
   console.log("course id is ",courseId);
   
+  const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState('Overview');
   const [course, setCourse] = useState({});
+
 
   // Handler to fetch course details by ID
   const fetchCourseDetails = async (id) => {
@@ -128,7 +131,8 @@ const CourseDetails = ({ courseId }) => {
     {course?._id && (
     <View className="absolute bottom-5 left-0 right-0 px-4 z-10 pb-3">
       <TouchableOpacity className="bg-black py-3 rounded-full">
-        <Text className="text-center text-white font-semibold">Buy Course</Text>
+        <Text className="text-center text-white font-semibold" 
+            onPress={() => navigation.navigate("stack/courseCheckout", { courseData: course })}>Buy Course</Text>
       </TouchableOpacity>
     </View>
   )}
