@@ -10,7 +10,7 @@ import { FontAwesome, Feather, Ionicons,AntDesign ,MaterialIcons } from "@expo/v
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native';
-
+// import "./../../global.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthData } from "./../../redux/slices/authSlice";
 export default function HomeScreen() {
@@ -64,7 +64,7 @@ export default function HomeScreen() {
           />
         </TouchableOpacity>
         <TouchableOpacity  onPress={() => navigation.navigate("stack/profile")} className="bg-black p-2 rounded-full text-white">
-        <AntDesign name="user" size={24}  className="text-gray-200" />
+        <AntDesign name="user" size={24}   color={"white"} />
         </TouchableOpacity>
         </View> : <MaterialIcons name="login" size={24} color="black" />}
       </View>
@@ -131,7 +131,7 @@ export default function HomeScreen() {
           <TouchableOpacity
             key={index}
             className="flex-row items-center bg-gray-100 rounded-lg p-3 mb-4 shadow"
-            onPress={() => navigation.navigate("stack/courseDetails")}
+            onPress={() => navigation.navigate("stack/courseDetails", { courseId: course._id })}
           >
             <View className="w-20 h-20 bg-gray-300 rounded-lg" />
             <View className="flex-1 ml-4">

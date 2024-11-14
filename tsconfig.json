@@ -14,5 +14,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts"
-  ]
+, "components/Pages/Course/CourseDetails.jsx", "components/Pages/Course/CourseDetails.jsx"  ]
 }
