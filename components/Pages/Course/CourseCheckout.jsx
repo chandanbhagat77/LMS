@@ -8,7 +8,7 @@ const CoursePurchaseOverview = () => {
             description: 'Credits towards consultation',
             image: 'https://i.imgur.com/3g7nmJC.jpg',
             currency: 'INR',
-            key: 'test-key',
+            key: 'rzp_test_UNIZ41P0iAVJ38',
             amount: '5000',
             name: 'Acme Corp',
             order_id: 'order_DslnoIgkIDL8Zt',//Replace this with an order_id created using Orders API.
